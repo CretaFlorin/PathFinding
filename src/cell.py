@@ -7,6 +7,8 @@ class Cell:
         self.row = row
         self.col = col
         self.type = type
+        self.parent = None
+        self.score = 0
 
     def draw(self, surface):
         x = self.col * CELL_SIZE
@@ -14,5 +16,9 @@ class Cell:
         color = COLOR_MAP[self.type]
 
         rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
-        pygame.draw.rect(surface, color, rect)
-        pygame.draw.rect(surface, (200, 200, 200), rect, 1)
+        if(self.type == CellType.WALL):
+            pygame.draw.rect(surface, (200, 200, 200), rect, 1)
+            pygame.draw.rect(surface, color, rect)
+        else:
+            pygame.draw.rect(surface, color, rect)
+            pygame.draw.rect(surface, (200, 200, 200), rect, 1)
